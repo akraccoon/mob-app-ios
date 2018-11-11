@@ -121,7 +121,7 @@
 }
 
 // Respond to Universal Links
-- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray *restorableObjects))restorationHandler {
+- (BOOL) application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(nonnull void (^)(NSArray<id<UIUserActivityRestoring>> * _Nullable))restorationHandler {
     
     if (self.environment.config.fabricConfig.kits.branchConfig.enabled) {
         return [[Branch getInstance] continueUserActivity:userActivity];

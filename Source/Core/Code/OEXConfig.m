@@ -19,6 +19,7 @@ static NSString* const OEXFeedbackEmailAddress = @"FEEDBACK_EMAIL_ADDRESS";
 static NSString* const OEXOrganizationCode = @"ORGANIZATION_CODE";
 
 static NSString* const OEXOAuthClientID = @"OAUTH_CLIENT_ID";
+static NSString* const OEXOAuthClientSecret = @"OAUTH_CLIENT_SECRET";
 
 // Debug
 static NSString* const OEXDebugEnabledKey = @"SHOW_DEBUG";
@@ -121,6 +122,10 @@ static OEXConfig* sSharedConfig;
 
 - (NSString*)oauthClientID {
     return [self stringForKey:OEXOAuthClientID];
+}
+
+- (NSString*)oauthClientSecret {
+    return [self stringForKey:OEXOAuthClientSecret];
 }
 
 #pragma mark - Debug

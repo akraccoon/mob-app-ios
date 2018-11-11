@@ -21,11 +21,11 @@
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
+            buildForTesting = "NO"
+            buildForRunning = "NO"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
+            buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "BECB7B2B1924C0C3009C77F1"
@@ -77,16 +77,6 @@
                BlueprintIdentifier = "77E647961C90C10300B6740D"
                BuildableName = "edXCoreTests.xctest"
                BlueprintName = "edXCoreTests"
-               ReferencedContainer = "container:edX.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BECB7B2B1924C0C3009C77F1"
-               BuildableName = "edXTests.xctest"
-               BlueprintName = "edXTests"
                ReferencedContainer = "container:edX.xcodeproj">
             </BuildableReference>
          </TestableReference>
