@@ -43,10 +43,6 @@ import Foundation
         userContentController.add(self, name: "sendTokenToApplication")
         
         self.view = self.webView
-
-        //        webView = WKWebView()
-        //        webView.navigationDelegate = self
-        //        view = webView
     }
     
     override func viewDidLoad() {
@@ -56,7 +52,6 @@ import Foundation
         let oauthClientID = config.oauthClientID()!
         let oauthClientSecret = config.oauthClientSecret()!
         let stringUrl = URL(string: "\(apiHostURL)/oauth2/authorize/?scope=openid+profile+email+permissions&state=xyz&redirect_uri=\(apiHostURL)/api/mobile/v0.5/?app=ios&response_type=code&client_id=\(oauthClientID)")!
-//        print("components.url \(stringUrl)")
         webView.load(URLRequest(url: stringUrl))
         webView.allowsBackForwardNavigationGestures = true
     }
@@ -90,13 +85,10 @@ import Foundation
         let task: URLSessionDataTask = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data,
                   let dict = (try? JSONSerialization.jsonObject(with: data)) as? [String: Any],
-                  error == nil else {                                                 // check for fundamental networking error
-//                print("error=\(error ?? "" as! Error)")
+                  error == nil else {
                 return
             }
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {           // check for http errors
-//                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-//                print("response = \(response)")
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
                 return
             }
             completion(dict)
@@ -106,12 +98,9 @@ import Foundation
     }
 
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
-//        print("Page Being loaded is \(navigationAction.request)")
-
         let urlRequestResult = "\(navigationAction.request)"
         if urlRequestResult.range(of: "code=") != nil {
             let oauthCode = "\(navigationAction.request)".components(separatedBy: "code=")[1]
-//            print("oauthCode = \(oauthCode)" )
             getAsyncRequest(oauthCode: oauthCode) { responseData in
                 var token = OEXAccessToken(tokenDetails: responseData)
                 OEXAuthentication.handleSuccessfulLogin(with: token, completionHandler: {responseData, response, error in })
@@ -139,7 +128,6 @@ import Foundation
 
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
         let headers = (navigationResponse.response as! HTTPURLResponse).allHeaderFields
-//        print(headers)
         decisionHandler(.allow)
     }
 
@@ -164,20 +152,14 @@ import Foundation
         //        let tokenDict = tokensArray.first as? NSDictionary
 
         let messageBody = message.body as? NSArray
-        
-//        print(messageBody!)
-
         if (messageBody?.count == 0 ||  messageBody == nil)  {
             return
         }
-        //
         let tokenDict = messageBody?.firstObject as! NSDictionary
         let access_token = tokenDict["access_token"] as! String
         let token_type = tokenDict["token_type"] as! String
         let expires_in = tokenDict["expires_in"] as! String
         let scope = tokenDict["scope"] as! String
-//        print(access_token, token_type, expires_in, scope)
-        //        }
     }
     
 }
